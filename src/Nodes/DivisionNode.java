@@ -27,7 +27,7 @@ public class DivisionNode extends BinaryOperatorNode {
         int left = this.leftChild.evaluate(symbolTable);
         int right = this.rightChild.evaluate(symbolTable);
         if (right == 0) {
-            Errors.error("Division by zero: ", "" + left + " // " + right);
+            Errors.error("Division by zero", "" + left + " // " + right);
         }
         return this.leftChild.evaluate(symbolTable) / this.rightChild.evaluate(symbolTable);
     }

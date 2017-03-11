@@ -25,7 +25,7 @@ public class SquareRootNode extends UnaryOperatorNode{
     public int evaluate(SymbolTable symbolTable) {
         int child = this.child.evaluate(symbolTable);
         if (child < 0) {
-            Errors.error("Negative value: ", child);
+            Errors.error("Negative value", child);
         }
 
         return (int) Math.sqrt(child);
