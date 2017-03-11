@@ -208,7 +208,7 @@ public class MerpTest {
             return;
         }
 
-        processor.constructTree(new ArrayList<String>(Arrays.asList(equation.split(" "))));
+        processor.constructTree(new ArrayList<>(Arrays.asList(equation.split(" "))));
 
         if(processor.getTree().toInfixString().equals(expectedInfix)){
             System.out.println("\t" + type + " toInfixString passed");
