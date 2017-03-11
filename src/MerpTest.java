@@ -128,6 +128,20 @@ public class MerpTest {
 
         testTree("2 ^ _ 1", "(2 ^ (_ 1))", "^ 2 _ 1",
                 "2 1 _ ^", 0, "infix", x);
+
+        testTree("1 + 2 ^ 3 + _ 9", "((1 + (2 ^ 3)) + (_ 9))", "+ + 1 ^ 2 3 _ 9",
+                "1 2 3 ^ + 9 _ +", 0, "infix", x);
+        // Test division by zero
+        //testTree("1 // 0", "(1 // 0)", "// 1 0",
+        //        "1 0 //", -1, "infix", x);
+
+        // Test invalid expression
+        //testTree("1 0 (", null, null, null, -1, "postfix", x);
+
+        //testTree("1 ( 0", null, null, null, -1, "infix", x);
+
+        //testTree("( 1 0", null, null, null, -1, "prefix", x);
+
     }
 
     public static void testEquation(String equation, String expectedInfix, String expectedPrefix,

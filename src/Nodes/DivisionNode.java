@@ -1,5 +1,6 @@
 package Nodes;
 
+import Util.Errors;
 import Util.SymbolTable;
 
 /**
@@ -23,6 +24,11 @@ public class DivisionNode extends BinaryOperatorNode {
      * @return the integer value of this node
      */
     public int evaluate(SymbolTable symbolTable) {
+        int left = this.leftChild.evaluate(symbolTable);
+        int right = this.rightChild.evaluate(symbolTable);
+        if (right == 0) {
+            Errors.error("Division by zero: ", "" + left + " // " + right);
+        }
         return this.leftChild.evaluate(symbolTable) / this.rightChild.evaluate(symbolTable);
     }
 }

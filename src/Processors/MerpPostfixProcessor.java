@@ -36,33 +36,52 @@ public class MerpPostfixProcessor extends MerpProcessor {
             } else if (isNumeric(s)) {
                 st.push(new ConstantNode(Integer.parseInt(s)));
             } else if ("|@_".indexOf(s.charAt(0)) == -1) {
-                MerpNode right = st.pop();
-                MerpNode left = st.pop();
-
                 if (s.equals("+")) {
+                    MerpNode right = st.pop();
+                    MerpNode left = st.pop();
                     st.push(new AdditionNode(left, right));
                 } else if (s.equals("-")) {
+                    MerpNode right = st.pop();
+                    MerpNode left = st.pop();
                     st.push(new SubtractionNode(left, right));
                 } else if (s.equals("*")) {
+                    MerpNode right = st.pop();
+                    MerpNode left = st.pop();
                     st.push(new MultiplicationNode(left, right));
                 } else if (s.equals("//")) {
+                    MerpNode right = st.pop();
+                    MerpNode left = st.pop();
                     st.push(new DivisionNode(left, right));
                 } else if (s.equals("^")) {
+                    MerpNode right = st.pop();
+                    MerpNode left = st.pop();
                     st.push(new PowerNode(left, right));
                 } else if (s.equals(">")) {
+                    MerpNode right = st.pop();
+                    MerpNode left = st.pop();
                     st.push(new GreaterThanNode(left, right));
                 } else if (s.equals(">=")) {
+                    MerpNode right = st.pop();
+                    MerpNode left = st.pop();
                     st.push(new GreaterThanEqualNode(left, right));
                 } else if (s.equals("<")) {
+                    MerpNode right = st.pop();
+                    MerpNode left = st.pop();
                     st.push(new LessThanNode(left, right));
                 } else if (s.equals("<=")) {
+                    MerpNode right = st.pop();
+                    MerpNode left = st.pop();
                     st.push(new LessThanEqualNode(left, right));
                 } else if (s.equals("==")) {
+                    MerpNode right = st.pop();
+                    MerpNode left = st.pop();
                     st.push(new EqualityNode(left, right));
                 } else if (s.equals("!=")) {
+                    MerpNode right = st.pop();
+                    MerpNode left = st.pop();
                     st.push(new NotEqualityNode(left, right));
                 } else {
-                    Errors.error("Invalid Merp Expression: ", s);
+                    Errors.error("Invalid Merp expression: ", s);
                 }
             } else {
                 MerpNode child = st.pop();
