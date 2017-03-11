@@ -119,18 +119,46 @@ public class MerpTest {
         //Add more tests as you see fit.
         testTree("@ @ _ _ 4 ^ 2", "(@ (@ (_ (_ (4 ^ 2)))))", "@ @ _ _ ^ 4 2",
                 "4 2 ^ _ _ @ @", 2, "infix", x);
+        testTree("@ @ _ _ ^ 4 2", "(@ (@ (_ (_ (4 ^ 2)))))", "@ @ _ _ ^ 4 2",
+                "4 2 ^ _ _ @ @", 2, "prefix", x);
+        testTree("4 2 ^ _ _ @ @", "(@ (@ (_ (_ (4 ^ 2)))))", "@ @ _ _ ^ 4 2",
+                "4 2 ^ _ _ @ @", 2, "postfix", x);
+
+
 
         testTree("2 ^ 3 ^ 1", "(2 ^ (3 ^ 1))", "^ 2 ^ 3 1",
                 "2 3 1 ^ ^", 8, "infix", x);
+        testTree("^ 2 ^ 3 1", "(2 ^ (3 ^ 1))", "^ 2 ^ 3 1",
+                "2 3 1 ^ ^", 8, "prefix", x);
+        testTree("2 3 1 ^ ^", "(2 ^ (3 ^ 1))", "^ 2 ^ 3 1",
+                "2 3 1 ^ ^", 8, "postfix", x);
 
         testTree("3 < 2 < 0", "((3 < 2) < 0)", "< < 3 2 0",
                 "3 2 < 0 <", 0, "infix", x);
+        testTree("< < 3 2 0", "((3 < 2) < 0)", "< < 3 2 0",
+                "3 2 < 0 <", 0, "prefix", x);
+        testTree("3 2 < 0 <", "((3 < 2) < 0)", "< < 3 2 0",
+                "3 2 < 0 <", 0, "postfix", x);
 
         testTree("2 ^ _ 1", "(2 ^ (_ 1))", "^ 2 _ 1",
                 "2 1 _ ^", 0, "infix", x);
 
         testTree("1 + 2 ^ 3 + _ 9", "((1 + (2 ^ 3)) + (_ 9))", "+ + 1 ^ 2 3 _ 9",
                 "1 2 3 ^ + 9 _ +", 0, "infix", x);
+        testTree("+ + 1 ^ 2 3 _ 9", "((1 + (2 ^ 3)) + (_ 9))", "+ + 1 ^ 2 3 _ 9",
+                "1 2 3 ^ + 9 _ +", 0, "prefix", x);
+        testTree("1 2 3 ^ + 9 _ +", "((1 + (2 ^ 3)) + (_ 9))", "+ + 1 ^ 2 3 _ 9",
+                "1 2 3 ^ + 9 _ +", 0, "postfix", x);
+
+        testTree("1 + 2 * 3", "(1 + (2 * 3))", "+ 1 * 2 3",
+                "1 2 3 * +", 7, "infix", x);
+
+        testTree("| _ 1337 * 1", "((| (_ 1337)) * 1)", "* | _ 1337 1",
+                "1337 _ | 1 *", 1337, "infix", x);
+
+        x.put("y", -10);
+
+        testTree("| y", "(| y)", "| y", "y |", 10, "infix", x);
         // Test division by zero
         //testTree("1 // 0", "(1 // 0)", "// 1 0",
         //        "1 0 //", -1, "infix", x);
@@ -195,7 +223,7 @@ public class MerpTest {
             System.out.println("\t" + type + " toPrefixString passed");
         }
         else{
-            System.out.println("\t" + equation + " toInfixString failed. Got " +
+            System.out.println("\t" + equation + " toPrefixString failed. Got " +
                     processor.getTree().toPrefixString() +
                     " expected " + expectedPrefix);
         }
