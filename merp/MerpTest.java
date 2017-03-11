@@ -15,14 +15,14 @@ public class MerpTest {
     public static void main(String[] args) {
 
         // Tests just a constant
-        //testEquation("5", "5", "5",
-                //"5", 5, new SymbolTable());
+        testEquation("5", "5", "5",
+                "5", 5, new SymbolTable());
 
         // Tests a variable
         SymbolTable x = new SymbolTable();
         x.put("x", 5);
-        //testEquation("x", "x", "x",
-                //"x", 5, x);
+        testEquation("x", "x", "x",
+                "x", 5, x);
 
         // Test single binary operation,. addition, no variables
         testTree("5 + 2", "(5 + 2)", "+ 5 2",
@@ -117,17 +117,6 @@ public class MerpTest {
                 "y _", -2, "postfix", x);
 
         //Add more tests as you see fit.
-        testTree("@ @ _ _ 4 ^ 2", "(@ (@ (_ (_ (4 ^ 2)))))", "@ @ _ _ ^ 4 2",
-                "4 2 ^ _ _ @ @", 2, "infix", x);
-
-        testTree("2 ^ 3 ^ 1", "(2 ^ (3 ^ 1))", "^ 2 ^ 3 1",
-                "2 3 1 ^ ^", 8, "infix", x);
-
-        testTree("3 < 2 < 0", "((3 < 2) < 0)", "< < 3 2 0",
-                "3 2 < 0 <", 0, "infix", x);
-
-        testTree("2 ^ _ 1", "(2 ^ (_ 1))", "^ 2 _ 1",
-                "2 1 _ ^", 0, "infix", x);
     }
 
     public static void testEquation(String equation, String expectedInfix, String expectedPrefix,
