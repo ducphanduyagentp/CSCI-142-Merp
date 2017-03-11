@@ -12,7 +12,7 @@ import java.util.Stack;
 public class MerpPostfixProcessor extends MerpProcessor {
 
     public MerpPostfixProcessor() {
-
+        this.tree = null;
     }
 
     /**
@@ -81,7 +81,7 @@ public class MerpPostfixProcessor extends MerpProcessor {
                     MerpNode left = st.pop();
                     st.push(new NotEqualityNode(left, right));
                 } else {
-                    Errors.error("Invalid Merp expression: ", s);
+                    Errors.error("Invalid Merp expression", s);
                 }
             } else {
                 MerpNode child = st.pop();

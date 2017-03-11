@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class MerpPrefixProcessor extends MerpProcessor{
 
     public MerpPrefixProcessor() {
-
+        this.tree = null;
     }
 
     /**
@@ -69,7 +69,7 @@ public class MerpPrefixProcessor extends MerpProcessor{
             } else if (tokens.get(0).equals("|")) {
                 u = new AbsValueNode(null);
             } else {
-                Errors.error("Invalid Merp Expression: ", tokens.get(0));
+                Errors.error("Invalid Merp Expression", tokens.get(0));
             }
             if (tokens.size() > 1) {
                 MerpNode left = constructTreeHelper(new ArrayList<>(tokens.subList(1, tokens.size())));

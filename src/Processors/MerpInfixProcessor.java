@@ -11,7 +11,7 @@ import java.util.Stack;
  */
 public class MerpInfixProcessor extends MerpProcessor {
     public MerpInfixProcessor() {
-
+        this.tree = null;
     }
 
     /**
@@ -58,7 +58,7 @@ public class MerpInfixProcessor extends MerpProcessor {
                 } else if (s.equals("|")) {
                     u = new AbsValueNode(null);
                 } else {
-                    Errors.error("Invalid Merp Expression: ", s);
+                    Errors.error("Invalid Merp Expression", s);
                 }
 
                 while(!st2.empty()) {
