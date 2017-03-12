@@ -36,6 +36,9 @@ public class MerpPostfixProcessor extends MerpProcessor {
             } else if (isNumeric(s)) {
                 st.push(new ConstantNode(Integer.parseInt(s)));
             } else if ("|@_".indexOf(s.charAt(0)) == -1) {
+                if (st.size() < 2) {
+                    Errors.error("Unexpected token when parsing the Merp expression", "");
+                }
                 if (s.equals("+")) {
                     MerpNode right = st.pop();
                     MerpNode left = st.pop();
@@ -84,6 +87,9 @@ public class MerpPostfixProcessor extends MerpProcessor {
                     Errors.error("Invalid Merp expression", s);
                 }
             } else {
+                if (st.empty()) {
+                    Errors.error("Unexpected token when parsing the Merp expression", "");
+                }
                 MerpNode child = st.pop();
                 if (s.equals("_")) {
                     st.push(new NegationNode(child));
@@ -93,6 +99,9 @@ public class MerpPostfixProcessor extends MerpProcessor {
                     st.push(new AbsValueNode(child));
                 }
             }
+        }
+        if (st.size() != 1) {
+            Errors.error("Unexpected token when parsing the Merp expression", "");
         }
         return st.pop();
     }

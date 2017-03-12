@@ -102,18 +102,26 @@ public class MerpInfixProcessor extends MerpProcessor {
             if (u.getNodeType() == MerpNode.NodeType.Constant || u.getNodeType() == MerpNode.NodeType.Variable) {
                 st.push(u);
             } else if (u.getNodeType() == MerpNode.NodeType.BinaryOperation) {
+                if (st.size() < 2) {
+                    Errors.error("Unexpected token when parsing the Merp expression", "");
+                }
                 MerpNode right = st.pop();
                 MerpNode left = st.pop();
                 ((BinaryOperatorNode) u).setLeftChild(left);
                 ((BinaryOperatorNode) u).setRightChild(right);
                 st.push(u);
             } else if (u.getNodeType() == MerpNode.NodeType.UnaryOperation) {
+                if (st.empty()) {
+                    Errors.error("Unexpected token when parsing the Merp expression", "");
+                }
                 MerpNode child = st.pop();
                 ((UnaryOperatorNode) u).setChild(child);
                 st.push(u);
             }
         }
-
+        if (st.size() != 1) {
+            Errors.error("Unexpected token when parsing the Merp expression", "");
+        }
         return st.pop();
     }
 }
